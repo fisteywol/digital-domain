@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f4f4f4;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #dc2626, #ffffff);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #dc2626;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links button {
+            background: none;
+            border: none;
+            color: #333;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-links button:hover {
+            background: #dc2626;
+            color: white;
+        }
+
+        .cart-badge {
+            background: #dc2626;
+            color: white;
+            border-radius: 50%;
+            padding: 0.2rem 0.5rem;
+            font-size: 0.8rem;
+            margin-left: 0.5rem;
+        }
+
+        .section {
+            display: none;
+            min-height: 100vh;
+            padding: 100px 2rem 2rem;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            color: #dc2626;
+            margin-bottom: 1rem;
+        }
+
+        .hero {
+            text-align: center;
+            background: linear-gradient(135deg, #dc2626, #ffffff);
+            color: white;
+            padding: 4rem 2rem;
+            margin: -100px -2rem 2rem;
+            border-radius: 0 0 20px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .team-member {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 400px;
+            margin: 2rem auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background: #dc2626;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #b91c1c;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #dc2626;
+            margin: 0.5rem 0;
+        }
+
+        .alert {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .staff-panel {
+            background: white;
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .accounts-list, .orders-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        .account-item, .order-item {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .checkout-success {
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .invoice-id {
+            font-size: 1.5rem;
+            color: #dc2626;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Dev Technology</div>
+            <div class="nav-links">
+                <button onclick="showSection('home')">Home</button>
+                <button onclick="showSection('about')">About</button>
+                <button onclick="showSection('portal')">Customer Portal</button>
+                <button id="productsBtn" onclick="showSection('products')" style="display: none;">Products</button>
+                <button id="cartBtn" onclick="showSection('checkout')" style="display: none;">
+                    Cart <span id="cartCount" class="cart-badge">0</span>
+                </button>
+                <button onclick="showSection('staff')">Staff</button>
+                <button id="logoutBtn" onclick="logout()" style="display: none;">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <h1>Welcome to Dev Technology</h1>
+            <p>Your premier destination for cutting-edge technology solutions</p>
+        </div>
+        <div class="container">
+            <h2>About Our Business</h2>
+            <p>Dev Technology is a leading provider of innovative technology solutions, specializing in custom development services and digital products. Our team of experts is dedicated to delivering high-quality solutions that meet your business needs.</p>
+            
+            <h2>Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>William Oyston</h3>
+                    <p>Chief Executive Officer</p>
+                    <p>Leading the company with vision and innovation</p>
+                </div>
+                <div class="team-member">
+                    <h3>Development Team</h3>
+                    <p>Software Engineers</p>
+                    <p>Creating amazing products and solutions</p>
+                </div>
+                <div class="team-member">
+                    <h3>Customer Support</h3>
+                    <p>Support Specialists</p>
+                    <p>Ensuring excellent customer experience</p>
+                </div>
+                <div class="team-member">
+                    <h3>Management Team</h3>
+                    <p>Operations & Strategy</p>
+                    <p>Driving business growth and efficiency</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h1>About Dev Technology</h1>
+            <p>Founded with a vision to revolutionize the technology landscape, Dev Technology has grown into a trusted partner for businesses seeking innovative solutions. Our server infrastructure is built on cutting-edge technology, ensuring reliable and scalable services for our clients.</p>
+            
+            <h2>Our Server Infrastructure</h2>
+            <p>We operate state-of-the-art servers with 99.9% uptime guarantee, advanced security protocols, and scalable architecture to handle projects of any size. Our redundant systems ensure your data is always safe and accessible.</p>
+            
+            <h2>Meet Our Team</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <h3>William Oyston - CEO</h3>
+                    <p>With years of experience in technology leadership, William guides our company's strategic direction and innovation initiatives.</p>
+                </div>
+                <div class="team-member">
+                    <h3>Directorship Team</h3>
+                    <p>Our board of directors brings diverse expertise and strategic oversight to ensure sustainable growth.</p>
+                </div>
+                <div class="team-member">
+                    <h3>Development Team</h3>
+                    <p>Skilled developers passionate about creating robust, efficient, and user-friendly solutions.</p>
+                </div>
+                <div class="team-member">
+                    <h3>Customer Support Team</h3>
+                    <p>Dedicated professionals committed to providing exceptional service and technical assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Portal Section -->
+    <section id="portal" class="section">
+        <div class="container">
+            <h1>Customer Portal</h1>
+            <div id="authForms">
+                <div class="form-container">
+                    <h2 id="formTitle">Login</h2>
+                    <form id="authForm">
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" required>
+                        </div>
+                        <div class="form-group" id="discordGroup" style="display: none;">
+                            <label for="discord">Discord Username:</label>
+                            <input type="text" id="discord">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" required>
+                        </div>
+                        <button type="submit" id="authSubmit">Login</button>
+                        <button type="button" onclick="toggleAuthMode()" style="background: #666; margin-left: 1rem;">
+                            <span id="toggleText">Create Account</span>
+                        </button>
+                    </form>
+                    <div id="authMessage"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="section">
+        <div class="container">
+            <h1>Our Products</h1>
+            <div id="productsGrid" class="products-grid">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Checkout Section -->
+    <section id="checkout" class="section">
+        <div class="container">
+            <h1>Checkout</h1>
+            <div id="checkoutContent">
+                <div id="cartItems"></div>
+                <button onclick="processCheckout()" style="margin-top: 2rem;">Complete Purchase</button>
+            </div>
+            <div id="checkoutSuccess" class="checkout-success" style="display: none;">
+                <h2>Thank You for Your Purchase!</h2>
+                <p>Please join our Discord server to claim your products.</p>
+                <div class="invoice-id">Invoice ID: <span id="invoiceId"></span></div>
+                <p>Your order has been sent to our Discord server for processing.</p>
+                <button onclick="showSection('products')">Continue Shopping</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Dashboard Section -->
+    <section id="staff" class="section">
+        <div class="container">
+            <h1>Staff Dashboard</h1>
+            
+            <div id="staffLogin" class="form-container">
+                <h2>Staff Login</h2>
+                <form id="staffLoginForm">
+                    <div class="form-group">
+                        <label for="staffUsername">Username:</label>
+                        <input type="text" id="staffUsername" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="staffPassword">Password:</label>
+                        <input type="password" id="staffPassword" required>
+                    </div>
+                    <button type="submit">Login</button>
+                </form>
+                <div id="staffMessage"></div>
+            </div>
+
+            <div id="staffDashboard" style="display: none;">
+                <div class="staff-panel">
+                    <h2>Add New Product</h2>
+                    <form id="addProductForm">
+                        <div class="form-group">
+                            <label for="productName">Product Name:</label>
+                            <input type="text" id="productName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productDescription">Description:</label>
+                            <textarea id="productDescription" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice">Price (Robux):</label>
+                            <input type="number" id="productPrice" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="productImage">Image URL:</label>
+                            <input type="url" id="productImage" required>
+                        </div>
+                        <button type="submit">Add Product</button>
+                    </form>
+                </div>
+
+                <div class="staff-panel">
+                    <h2>Manage Products</h2>
+                    <div id="manageProducts"></div>
+                </div>
+
+                <div class="staff-panel">
+                    <h2>Customer Accounts</h2>
+                    <div id="customerAccounts" class="accounts-list"></div>
+                </div>
+
+                <div class="staff-panel">
+                    <h2>Order Search</h2>
+                    <div class="form-group">
+                        <label for="invoiceSearch">Search by Invoice ID:</label>
+                        <input type="text" id="invoiceSearch" placeholder="Enter Invoice ID">
+                        <button onclick="searchInvoice()" style="margin-top: 0.5rem;">Search</button>
+                    </div>
+                    <div id="searchResults"></div>
+                </div>
+
+                <div class="staff-panel">
+                    <h2>All Orders</h2>
+                    <div id="allOrders" class="orders-list"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Global variables
+        let currentUser = null;
+        let isStaff = false;
+        let cart = [];
+        let isAuthMode = 'login'; // 'login' or 'register'
+
+        // Initialize data structures
+        let users = JSON.parse(window.localStorage?.getItem('users') || '{}') || {};
+        let products = JSON.parse(window.localStorage?.getItem('products') || '[]') || [];
+        let orders = JSON.parse(window.localStorage?.getItem('orders') || '[]') || [];
+
+        // Staff credentials
+        const staffCredentials = {
+            "WilliamOyston": "WilliamIsCool",
+            "Directorship": "Directorship12",
+            "Management": "Managers",
+            "CustomerSupport": "CSOT",
+            "Devs": "OgDevs"
+        };
+
+        // Navigation functions
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+        }
+
+        // Authentication functions
+        function toggleAuthMode() {
+            isAuthMode = isAuthMode === 'login' ? 'register' : 'login';
+            const formTitle = document.getElementById('formTitle');
+            const authSubmit = document.getElementById('authSubmit');
+            const toggleText = document.getElementById('toggleText');
+            const discordGroup = document.getElementById('discordGroup');
+            
+            if (isAuthMode === 'register') {
+                formTitle.textContent = 'Create Account';
+                authSubmit.textContent = 'Create Account';
+                toggleText.textContent = 'Login Instead';
+                discordGroup.style.display = 'block';
+            } else {
+                formTitle.textContent = 'Login';
+                authSubmit.textContent = 'Login';
+                toggleText.textContent = 'Create Account';
+                discordGroup.style.display = 'none';
+            }
+        }
+
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const discord = document.getElementById('discord').value;
+            const messageDiv = document.getElementById('authMessage');
+            
+            if (isAuthMode === 'register') {
+                if (users[username]) {
+                    showMessage(messageDiv, 'Username already exists!', 'error');
+                    return;
+                }
+                
+                users[username] = {
+                    password: password,
+                    discord: discord,
+                    createdAt: new Date().toISOString()
+                };
+                
+                saveData();
+                showMessage(messageDiv, 'Account created successfully! You can now login.', 'success');
+                toggleAuthMode();
+                loadCustomerAccounts();
+            } else {
+                if (users[username] && users[username].password === password) {
+                    currentUser = username;
+                    loginUser();
+                    showMessage(messageDiv, 'Login successful!', 'success');
+                } else {
+                    showMessage(messageDiv, 'Invalid username or password!', 'error');
+                }
+            }
+            
+            document.getElementById('authForm').reset();
+        });
+
+        function loginUser() {
+            document.getElementById('productsBtn').style.display = 'inline-block';
+            document.getElementById('cartBtn').style.display = 'inline-block';
+            document.getElementById('logoutBtn').style.display = 'inline-block';
+            loadProducts();
+            updateCartDisplay();
+        }
+
+        function logout() {
+            currentUser = null;
+            cart = [];
+            document.getElementById('productsBtn').style.display = 'none';
+            document.getElementById('cartBtn').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            showSection('home');
+        }
+
+        // Product functions
+        function loadProducts() {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <img src="${product.image}" alt="${product.name}" class="product-image" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDMwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIzMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjZjNmNGY2Ii8+Cjx0ZXh0IHg9IjE1MCIgeT0iMTAwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOWNhM2FmIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTQiPk5vIEltYWdlPC90ZXh0Pgo8L3N2Zz4='">
+                    <div class="product-info">
+                        <h3>${product.name}</h3>
+                        <p>${product.description}</p>
+                        <div class="product-price">${product.price} Robux</div>
+                        <button onclick="addToCart(${index})">Add to Cart</button>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+        }
+
+        function addToCart(productIndex) {
+            const product = products[productIndex];
+            const existingItem = cart.find(item => item.productIndex === productIndex);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    productIndex: productIndex,
+                    product: product,
+                    quantity: 1
+                });
+            }
+            
+            updateCartDisplay();
+        }
+
+        function updateCartDisplay() {
+            const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById('cartCount').textContent = cartCount;
+            
+            const cartItems = document.getElementById('cartItems');
+            if (cartItems) {
+                cartItems.innerHTML = '';
+                let total = 0;
+                
+                cart.forEach((item, index) => {
+                    const itemTotal = item.product.price * item.quantity;
+                    total += itemTotal;
+                    
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'product-card';
+                    cartItem.innerHTML = `
+                        <div class="product-info">
+                            <h3>${item.product.name}</h3>
+                            <p>Quantity: ${item.quantity}</p>
+                            <div class="product-price">${itemTotal} Robux</div>
+                            <button onclick="removeFromCart(${index})" style="background: #dc2626;">Remove</button>
+                        </div>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+                
+                if (cart.length === 0) {
+                    cartItems.innerHTML = '<p>Your cart is empty.</p>';
+                } else {
+                    const totalDiv = document.createElement('div');
+                    totalDiv.innerHTML = `<h2>Total: ${total} Robux</h2>`;
+                    totalDiv.style.textAlign = 'center';
+                    totalDiv.style.marginTop = '2rem';
+                    cartItems.appendChild(totalDiv);
+                }
+            }
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartDisplay();
+        }
+
+        function processCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            const invoiceId = 'INV-' + Date.now();
+            const order = {
+                invoiceId: invoiceId,
+                customer: currentUser,
+                discord: users[currentUser].discord,
+                items: [...cart],
+                total: cart.reduce((total, item) => total + (item.product.price * item.quantity), 0),
+                date: new Date().toISOString()
+            };
+            
+            orders.push(order);
+            saveData();
+            
+            // Simulate Discord webhook (would normally send to actual Discord)
+            console.log('Discord Webhook - New Order:', order);
+            
+            // Show success message
+            document.getElementById('checkoutContent').style.display = 'none';
+            document.getElementById('checkoutSuccess').style.display = 'block';
+            document.getElementById('invoiceId').textContent = invoiceId;
+            
+            // Clear cart
+            cart = [];
+            updateCartDisplay();
+            loadAllOrders();
+        }
+
+        // Staff functions
+        document.getElementById('staffLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('staffUsername').value;
+            const password = document.getElementById('staffPassword').value;
+            const messageDiv = document.getElementById('staffMessage');
+            
+            if (staffCredentials[username] && staffCredentials[username] === password) {
+                isStaff = true;
+                document.getElementById('staffLogin').style.display = 'none';
+                document.getElementById('staffDashboard').style.display = 'block';
+                showMessage(messageDiv, 'Staff login successful!', 'success');
+                loadStaffData();
+            } else {
+                showMessage(messageDiv, 'Invalid staff credentials!', 'error');
+            }
+        });
+
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const product = {
+                name: document.getElementById('productName').value,
+                description: document.getElementById('productDescription').value,
+                price: parseInt(document.getElementById('productPrice').value),
+                image: document.getElementById('productImage').value
+            };
+            
+            products.push(product);
+            saveData();
+            loadProducts();
+            loadManageProducts();
+            this.reset();
+            alert('Product added successfully!');
+        });
+
+        function loadStaffData() {
+            loadManageProducts();
+            loadCustomerAccounts();
+            loadAllOrders();
+        }
+
+        function loadManageProducts() {
+            const container = document.getElementById('manageProducts');
+            container.innerHTML = '';
+            
+            products.forEach((product, index) => {
+                const productDiv = document.createElement('div');
+                productDiv.className = 'account-item';
+                productDiv.innerHTML = `
+                    <div>
+                        <strong>${product.name}</strong> - ${product.price} Robux
+                        <br><small>${product.description}</small>
+                    </div>
+                    <button class="delete-btn" onclick="deleteProduct(${index})">Delete</button>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+
+        function deleteProduct(index) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                products.splice(index, 1);
+                saveData();
+                loadProducts();
+                loadManageProducts();
+            }
+        }
+
+        function loadCustomerAccounts() {
+            const container = document.getElementById('customerAccounts');
+            container.innerHTML = '';
+            
+            Object.keys(users).forEach(username => {
+                const user = users[username];
+                const accountDiv = document.createElement('div');
+                accountDiv.className = 'account-item';
+                accountDiv.innerHTML = `
+                    <div>
+                        <strong>${username}</strong><br>
+                        Discord: ${user.discord}<br>
+                        Created: ${new Date(user.createdAt).toLocaleDateString()}
+                    </div>
+                    <button class="delete-btn" onclick="deleteAccount('${username}')">Delete</button>
+                `;
+                container.appendChild(accountDiv);
+            });
+        }
+
+        function deleteAccount(username) {
+            if (confirm(`Are you sure you want to delete account: ${username}?`)) {
+                delete users[username];
+                saveData();
+                loadCustomerAccounts();
+            }
+        }
+
+        function searchInvoice() {
+            const invoiceId = document.getElementById('invoiceSearch').value;
+            const resultsDiv = document.getElementById('searchResults');
+            
+            const order = orders.find(o => o.invoiceId === invoiceId);
+            if (order) {
+                resultsDiv.innerHTML = `
+                    <div class="staff-panel">
+                        <h3>Order Found: ${order.invoiceId}</h3>
+                        <p><strong>Customer:</strong> ${order.customer}</p>
+                        <p><strong>Discord:</strong> ${order.discord}</p>
+                        <p><strong>Date:</strong> ${new Date(order.date).toLocaleString()}</p>
+                        <p><strong>Total:</strong> ${order.total} Robux</p>
+                        <h4>Items:</h4>
+                        <ul>
+                            ${order.items.map(item => `<li>${item.product.name} (x${item.quantity}) - ${item.product.price * item.quantity} Robux</li>`).join('')}
+                        </ul>
+                        <button class="delete-btn" onclick="deleteOrder('${order.invoiceId}')">Delete Order</button>
+                    </div>
+                `;
+            } else {
+                resultsDiv.innerHTML = '<p>No order found with that Invoice ID.</p>';
+            }
+        }
+
+        function loadAllOrders() {
+            const container = document.getElementById('allOrders');
+            container.innerHTML = '';
+            
+            orders.forEach(order => {
+                const orderDiv = document.createElement('div');
+                orderDiv.className = 'order-item';
+                orderDiv.innerHTML = `
+                    <div>
+                        <strong>${order.invoiceId}</strong><br>
+                        Customer: ${order.customer} (${order.discord})<br>
+                        Total: ${order.total} Robux<br>
+                        Date: ${new Date(order.date).toLocaleString()}<br>
+                        Items: ${order.items.map(item => `${item.product.name} (x${item.quantity})`).join(', ')}
+                    </div>
+                    <button class="delete-btn" onclick="deleteOrder('${order.invoiceId}')">Delete</button>
+                `;
+                container.appendChild(orderDiv);
+            });
+        }
+
+        function deleteOrder(invoiceId) {
+            if (confirm(`Are you sure you want to delete order: ${invoiceId}?`)) {
+                const index = orders.findIndex(o => o.invoiceId === invoiceId);
+                if (index > -1) {
+                    orders.splice(index, 1);
+                    saveData();
+                    loadAllOrders();
+                    document.getElementById('searchResults').innerHTML = '';
+                }
+            }
+        }
+
+        // Utility functions
+        function showMessage(element, message, type) {
+            element.innerHTML = `<div class="alert alert-${type}">${message}</div>`;
+            setTimeout(() => {
+                element.innerHTML = '';
+            }, 3000);
+        }
+
+        function saveData() {
+            // In a real application, this would save to a server/database
+            // For demonstration, we're using memory storage only
+            try {
+                if (typeof Storage !== 'undefined') {
+                    localStorage.setItem('users', JSON.stringify(users));
+                    localStorage.setItem('products', JSON.stringify(products));
+                    localStorage.setItem('orders', JSON.stringify(orders));
+                }
+            } catch (e) {
+                // Storage not available, data will be lost on page refresh
+                console.log('Storage not available - data stored in memory only');
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', function() {
+            // Reset checkout success display when switching sections
+            document.getElementById('checkoutContent').style.display = 'block';
+            document.getElementById('checkoutSuccess').style.display = 'none';
+            
+            // Load initial data if available
+            if (products.length === 0) {
+                // Add some sample products
+                products = [
+                    {
+                        name: "Custom Discord Bot",
+                        description: "Professional Discord bot with custom features tailored to your server needs.",
+                        price: 500,
+                        image: "https://via.placeholder.com/300x200/dc2626/ffffff?text=Discord+Bot"
+                    },
+                    {
+                        name: "Website Development",
+                        description: "Full-stack web development service with modern design and functionality.",
+                        price: 1000,
+                        image: "https://via.placeholder.com/300x200/dc2626/ffffff?text=Website+Dev"
+                    },
+                    {
+                        name: "Roblox Game Assets",
+                        description: "High-quality game assets and scripts for your Roblox game development.",
+                        price: 250,
+                        image: "https://via.placeholder.com/300x200/dc2626/ffffff?text=Game+Assets"
+                    }
+                ];
+                saveData();
+            }
+            
+            loadProducts();
+            updateCartDisplay();
+        });
+
+        // Handle section switching and reset forms
+        function showSection(sectionName) {
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Reset checkout display when leaving checkout
+            if (sectionName !== 'checkout') {
+                document.getElementById('checkoutContent').style.display = 'block';
+                document.getElementById('checkoutSuccess').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
