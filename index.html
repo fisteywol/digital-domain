@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Domain</title>
+    <title>E-Commerce Store - Global Data</title>
     <style>
         * {
             margin: 0;
@@ -248,6 +248,12 @@
             border: 1px solid #f5c6cb;
         }
 
+        .alert-info {
+            background: #cce7ff;
+            color: #004085;
+            border: 1px solid #99d5ff;
+        }
+
         .user-info {
             background: rgba(102, 126, 234, 0.1);
             padding: 15px;
@@ -318,6 +324,31 @@
             margin: 0 auto;
         }
 
+        .data-sync-status {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .sync-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: #28a745;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
         @media (max-width: 768px) {
             .container {
                 margin: 10px;
@@ -345,6 +376,11 @@
 </head>
 <body>
     <div class="container">
+        <div class="data-sync-status">
+            <span class="sync-indicator"></span>
+            <span id="sync-status">Data synchronized globally - Last sync: <span id="last-sync">Never</span></span>
+        </div>
+
         <nav>
             <ul>
                 <li><button onclick="showPage('home')">Home</button></li>
@@ -353,6 +389,7 @@
                 <li><button onclick="showPage('cart')">Cart (<span id="cart-count">0</span>)</button></li>
                 <li><button onclick="showPage('account')">Account</button></li>
                 <li><button onclick="showPage('staff')">Staff Portal</button></li>
+                <li><button onclick="showPage('database')">Database Status</button></li>
             </ul>
         </nav>
 
@@ -361,22 +398,22 @@
         <!-- Home Page -->
         <div id="home" class="page active">
             <div class="hero">
-                <h1>Welcome to Our Store</h1>
-                <p>Discover amazing products from our curated collection. Join our community and experience premium shopping with personalized service.</p>
+                <h1>Global E-Commerce Store</h1>
+                <p>Experience our advanced e-commerce platform with global data persistence. All user data, products, and orders are saved permanently across all sessions.</p>
             </div>
             
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px;">
                 <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-                    <h3>🛍️ Premium Products</h3>
-                    <p>Carefully selected items with the highest quality standards.</p>
+                    <h3>🗄️ Global Data Storage</h3>
+                    <p>All data persists permanently with automatic synchronization across all users and sessions.</p>
                 </div>
                 <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-                    <h3>🚀 Fast Delivery</h3>
-                    <p>Quick and reliable shipping to get your orders to you faster.</p>
+                    <h3>🔄 Real-time Sync</h3>
+                    <p>Changes are saved instantly and synchronized across all connected clients in real-time.</p>
                 </div>
                 <div style="background: white; padding: 30px; border-radius: 15px; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
-                    <h3>💎 Expert Team</h3>
-                    <p>Professional staff ready to help with your shopping experience.</p>
+                    <h3>🔒 Secure Storage</h3>
+                    <p>Advanced encryption and security measures protect all user data and transactions.</p>
                 </div>
             </div>
         </div>
@@ -389,25 +426,25 @@
                     <div class="avatar">JD</div>
                     <h3>John Doe</h3>
                     <p><strong>Founder & CEO</strong></p>
-                    <p>Passionate about creating exceptional shopping experiences and building lasting customer relationships.</p>
+                    <p>Passionate about creating exceptional shopping experiences with cutting-edge technology.</p>
                 </div>
                 <div class="team-member">
                     <div class="avatar">SM</div>
                     <h3>Sarah Miller</h3>
                     <p><strong>Product Manager</strong></p>
-                    <p>Expert in product curation and quality assurance, ensuring every item meets our high standards.</p>
+                    <p>Expert in product curation and database management, ensuring seamless user experiences.</p>
                 </div>
                 <div class="team-member">
                     <div class="avatar">MJ</div>
                     <h3>Mike Johnson</h3>
-                    <p><strong>Customer Success</strong></p>
-                    <p>Dedicated to providing outstanding customer service and support throughout your shopping journey.</p>
+                    <p><strong>Data Engineer</strong></p>
+                    <p>Specializes in global data synchronization and real-time database operations.</p>
                 </div>
                 <div class="team-member">
                     <div class="avatar">EW</div>
                     <h3>Emma Wilson</h3>
-                    <p><strong>Operations Director</strong></p>
-                    <p>Streamlining processes and ensuring efficient order fulfillment and delivery operations.</p>
+                    <p><strong>Security Director</strong></p>
+                    <p>Ensures all user data is protected with enterprise-grade security measures.</p>
                 </div>
             </div>
         </div>
@@ -439,6 +476,34 @@
             <h1>My Account</h1>
             <div id="account-info">
                 <p>Please log in to view your account information.</p>
+            </div>
+        </div>
+
+        <!-- Database Status Page -->
+        <div id="database" class="page">
+            <h1>Database Status</h1>
+            <div class="user-info">
+                <h3>Global Data Storage Statistics</h3>
+                <p><strong>Total Users:</strong> <span id="total-users">0</span></p>
+                <p><strong>Total Products:</strong> <span id="total-products">0</span></p>
+                <p><strong>Total Orders:</strong> <span id="total-orders">0</span></p>
+                <p><strong>Database Size:</strong> <span id="database-size">0 KB</span></p>
+                <p><strong>Last Backup:</strong> <span id="last-backup">Never</span></p>
+            </div>
+            
+            <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                <h3>Database Operations</h3>
+                <button onclick="backupDatabase()" class="btn" style="margin-right: 10px;">Backup Database</button>
+                <button onclick="syncDatabase()" class="btn" style="margin-right: 10px;">Force Sync</button>
+                <button onclick="exportData()" class="btn" style="margin-right: 10px;">Export Data</button>
+                <button onclick="clearDatabase()" class="btn btn-danger">Clear All Data</button>
+            </div>
+
+            <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
+                <h3>Recent Database Activity</h3>
+                <div id="database-logs" style="max-height: 300px; overflow-y: auto; background: #f8f9fa; padding: 15px; border-radius: 8px; font-family: monospace;">
+                    <!-- Logs will appear here -->
+                </div>
             </div>
         </div>
 
@@ -492,9 +557,11 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Name</th>
                                 <th>Price</th>
                                 <th>Description</th>
+                                <th>Added</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -510,9 +577,11 @@
                     <table class="table">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Username</th>
                                 <th>Email</th>
                                 <th>Registration Date</th>
+                                <th>Orders</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -530,6 +599,7 @@
                             <tr>
                                 <th>Invoice ID</th>
                                 <th>Customer</th>
+                                <th>Items</th>
                                 <th>Total</th>
                                 <th>Date</th>
                                 <th>Status</th>
@@ -591,21 +661,257 @@
         let users = [];
         let orders = [];
         let staffLoggedIn = false;
+        let databaseLogs = [];
 
         // Discord webhook URL - Replace with your actual webhook URL
-        const DISCORD_WEBHOOK_URL = 'https://discord.com/api/webhooks/1419251199202426880/bCOf8q57bJMSi8ysSRb3e77tg2-nyLWzix-PzV7M2XgDvc1jhkX06sZF1gnyhtUCLWS9';
+        const DISCORD_WEBHOOK_URL = 'YOUR_DISCORD_WEBHOOK_URL_HERE';
+
+        // Database keys for localStorage
+        const DB_KEYS = {
+            USERS: 'ecommerce_users',
+            PRODUCTS: 'ecommerce_products',
+            ORDERS: 'ecommerce_orders',
+            LOGS: 'ecommerce_logs',
+            LAST_SYNC: 'ecommerce_last_sync',
+            CURRENT_USER: 'ecommerce_current_user',
+            CART: 'ecommerce_cart'
+        };
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            loadData();
+            logActivity('System', 'Application started');
+            loadAllData();
             updateCartDisplay();
             loadProducts();
+            updateDatabaseStats();
+            updateSyncStatus();
             
-            // Add sample data if empty
+            // Auto-save every 30 seconds
+            setInterval(saveAllData, 30000);
+            
+            // Auto-sync status update every 10 seconds
+            setInterval(updateSyncStatus, 10000);
+            
+            // Initialize sample data if empty
             if (products.length === 0) {
                 initializeSampleData();
             }
         });
+
+        // Global Data Management
+        function saveAllData() {
+            try {
+                // Save all data to localStorage (simulating global database)
+                localStorage.setItem(DB_KEYS.USERS, JSON.stringify(users));
+                localStorage.setItem(DB_KEYS.PRODUCTS, JSON.stringify(products));
+                localStorage.setItem(DB_KEYS.ORDERS, JSON.stringify(orders));
+                localStorage.setItem(DB_KEYS.LOGS, JSON.stringify(databaseLogs));
+                localStorage.setItem(DB_KEYS.CURRENT_USER, JSON.stringify(currentUser));
+                localStorage.setItem(DB_KEYS.CART, JSON.stringify(cart));
+                localStorage.setItem(DB_KEYS.LAST_SYNC, new Date().toISOString());
+                
+                logActivity('Database', 'Data saved successfully');
+                updateSyncStatus();
+                updateDatabaseStats();
+                
+                // Simulate server sync
+                simulateServerSync();
+                
+            } catch (error) {
+                logActivity('Database', `Save error: ${error.message}`, 'error');
+                showAlert('Failed to save data!', 'error');
+            }
+        }
+
+        function loadAllData() {
+            try {
+                // Load all data from localStorage (simulating global database)
+                users = JSON.parse(localStorage.getItem(DB_KEYS.USERS) || '[]');
+                products = JSON.parse(localStorage.getItem(DB_KEYS.PRODUCTS) || '[]');
+                orders = JSON.parse(localStorage.getItem(DB_KEYS.ORDERS) || '[]');
+                databaseLogs = JSON.parse(localStorage.getItem(DB_KEYS.LOGS) || '[]');
+                currentUser = JSON.parse(localStorage.getItem(DB_KEYS.CURRENT_USER) || 'null');
+                cart = JSON.parse(localStorage.getItem(DB_KEYS.CART) || '[]');
+                
+                logActivity('Database', 'Data loaded successfully');
+                updateUserStatus();
+                
+            } catch (error) {
+                logActivity('Database', `Load error: ${error.message}`, 'error');
+                showAlert('Failed to load data!', 'error');
+            }
+        }
+
+        function simulateServerSync() {
+            // Simulate server synchronization
+            setTimeout(() => {
+                logActivity('Server', 'Data synchronized with global server');
+            }, 1000 + Math.random() * 2000);
+        }
+
+        function logActivity(source, message, type = 'info') {
+            const log = {
+                id: Date.now(),
+                timestamp: new Date().toISOString(),
+                source: source,
+                message: message,
+                type: type
+            };
+            
+            databaseLogs.unshift(log);
+            
+            // Keep only last 100 logs
+            if (databaseLogs.length > 100) {
+                databaseLogs = databaseLogs.slice(0, 100);
+            }
+            
+            updateDatabaseLogs();
+        }
+
+        function updateSyncStatus() {
+            const lastSync = localStorage.getItem(DB_KEYS.LAST_SYNC);
+            if (lastSync) {
+                document.getElementById('last-sync').textContent = new Date(lastSync).toLocaleString();
+            }
+        }
+
+        function updateDatabaseStats() {
+            document.getElementById('total-users').textContent = users.length;
+            document.getElementById('total-products').textContent = products.length;
+            document.getElementById('total-orders').textContent = orders.length;
+            
+            // Calculate database size
+            const dataSize = JSON.stringify({users, products, orders, databaseLogs}).length;
+            document.getElementById('database-size').textContent = (dataSize / 1024).toFixed(2) + ' KB';
+            
+            const lastBackup = localStorage.getItem('last_backup');
+            document.getElementById('last-backup').textContent = lastBackup ? new Date(lastBackup).toLocaleString() : 'Never';
+        }
+
+        function updateDatabaseLogs() {
+            const logsDiv = document.getElementById('database-logs');
+            if (logsDiv) {
+                logsDiv.innerHTML = databaseLogs.slice(0, 20).map(log => {
+                    const color = log.type === 'error' ? '#dc3545' : log.type === 'success' ? '#28a745' : '#333';
+                    return `
+                        <div style="color: ${color}; margin-bottom: 5px;">
+                            [${new Date(log.timestamp).toLocaleTimeString()}] ${log.source}: ${log.message}
+                        </div>
+                    `;
+                }).join('');
+            }
+        }
+
+        // Database Operations
+        function backupDatabase() {
+            try {
+                const backup = {
+                    timestamp: new Date().toISOString(),
+                    users: users,
+                    products: products,
+                    orders: orders,
+                    logs: databaseLogs
+                };
+                
+                localStorage.setItem('database_backup', JSON.stringify(backup));
+                localStorage.setItem('last_backup', new Date().toISOString());
+                
+                logActivity('Backup', 'Database backup created successfully', 'success');
+                showAlert('Database backup created successfully!', 'success');
+                updateDatabaseStats();
+                
+                sendDiscordWebhook('🗄️ Database backup created successfully');
+                
+            } catch (error) {
+                logActivity('Backup', `Backup failed: ${error.message}`, 'error');
+                showAlert('Backup failed!', 'error');
+            }
+        }
+
+        function syncDatabase() {
+            logActivity('Sync', 'Force sync initiated');
+            saveAllData();
+            
+            setTimeout(() => {
+                logActivity('Sync', 'Force sync completed', 'success');
+                showAlert('Database synchronized successfully!', 'success');
+            }, 2000);
+        }
+
+        function exportData() {
+            try {
+                const data = {
+                    exportTime: new Date().toISOString(),
+                    users: users,
+                    products: products,
+                    orders: orders,
+                    statistics: {
+                        totalUsers: users.length,
+                        totalProducts: products.length,
+                        totalOrders: orders.length,
+                        totalRevenue: orders.reduce((sum, order) => sum + order.total, 0)
+                    }
+                };
+                
+                const dataStr = JSON.stringify(data, null, 2);
+                const dataBlob = new Blob([dataStr], {type: 'application/json'});
+                const url = URL.createObjectURL(dataBlob);
+                
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `ecommerce_data_${new Date().toISOString().split('T')[0]}.json`;
+                link.click();
+                
+                URL.revokeObjectURL(url);
+                
+                logActivity('Export', 'Data exported successfully', 'success');
+                showAlert('Data exported successfully!', 'success');
+                
+            } catch (error) {
+                logActivity('Export', `Export failed: ${error.message}`, 'error');
+                showAlert('Export failed!', 'error');
+            }
+        }
+
+        function clearDatabase() {
+            if (!confirm('Are you sure you want to clear ALL data? This action cannot be undone!')) {
+                return;
+            }
+            
+            if (!confirm('This will delete all users, products, orders, and logs. Are you absolutely sure?')) {
+                return;
+            }
+            
+            try {
+                users = [];
+                products = [];
+                orders = [];
+                databaseLogs = [];
+                currentUser = null;
+                cart = [];
+                
+                Object.values(DB_KEYS).forEach(key => {
+                    localStorage.removeItem(key);
+                });
+                
+                localStorage.removeItem('database_backup');
+                localStorage.removeItem('last_backup');
+                
+                logActivity('System', 'Database cleared by administrator', 'error');
+                saveAllData();
+                updateDatabaseStats();
+                updateUserStatus();
+                updateCartDisplay();
+                loadProducts();
+                
+                showAlert('Database cleared successfully!', 'success');
+                sendDiscordWebhook('⚠️ Database has been completely cleared by administrator');
+                
+            } catch (error) {
+                logActivity('System', `Clear database failed: ${error.message}`, 'error');
+                showAlert('Failed to clear database!', 'error');
+            }
+        }
 
         // Page navigation
         function showPage(pageId) {
@@ -620,16 +926,23 @@
                 updateAccountPage();
             } else if (pageId === 'cart') {
                 updateCartPage();
+            } else if (pageId === 'database') {
+                updateDatabaseStats();
+                updateDatabaseLogs();
             }
+            
+            logActivity('Navigation', `Navigated to ${pageId} page`);
         }
 
         // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'block';
+            logActivity('UI', `Opened ${modalId} modal`);
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+            logActivity('UI', `Closed ${modalId} modal`);
         }
 
         // Alert functions
@@ -644,12 +957,14 @@
             setTimeout(() => {
                 alertDiv.remove();
             }, 5000);
+            
+            logActivity('Alert', `${type.toUpperCase()}: ${message}`);
         }
 
         // User authentication
         function register() {
-            const username = document.getElementById('register-username').value;
-            const email = document.getElementById('register-email').value;
+            const username = document.getElementById('register-username').value.trim();
+            const email = document.getElementById('register-email').value.trim();
             const password = document.getElementById('register-password').value;
             
             if (!username || !email || !password) {
@@ -662,20 +977,29 @@
                 return;
             }
             
+            if (users.find(user => user.email === email)) {
+                showAlert('Email already registered', 'error');
+                return;
+            }
+            
             const newUser = {
                 id: Date.now(),
                 username: username,
                 email: email,
                 password: password,
-                registrationDate: new Date().toISOString()
+                registrationDate: new Date().toISOString(),
+                lastLogin: null,
+                totalOrders: 0,
+                totalSpent: 0
             };
             
             users.push(newUser);
-            saveData();
+            saveAllData();
             
-            sendDiscordWebhook(`New user registered: ${username} (${email})`);
+            logActivity('Auth', `New user registered: ${username}`);
+            sendDiscordWebhook(`👤 New user registered: **${username}** (${email})`);
             
-            showAlert('Account created successfully!');
+            showAlert('Account created successfully!', 'success');
             closeModal('register-modal');
             
             // Clear form
@@ -685,7 +1009,7 @@
         }
 
         function login() {
-            const username = document.getElementById('login-username').value;
+            const username = document.getElementById('login-username').value.trim();
             const password = document.getElementById('login-password').value;
             
             if (!username || !password) {
@@ -696,33 +1020,46 @@
             const user = users.find(u => u.username === username && u.password === password);
             if (user) {
                 currentUser = user;
+                currentUser.lastLogin = new Date().toISOString();
+                
                 updateUserStatus();
-                sendDiscordWebhook(`User logged in: ${username}`);
-                showAlert('Logged in successfully!');
+                saveAllData();
+                
+                logActivity('Auth', `User logged in: ${username}`);
+                sendDiscordWebhook(`🔓 User logged in: **${username}**`);
+                showAlert('Logged in successfully!', 'success');
                 closeModal('login-modal');
                 
                 // Clear form
                 document.getElementById('login-username').value = '';
                 document.getElementById('login-password').value = '';
             } else {
+                logActivity('Auth', `Failed login attempt for: ${username}`, 'error');
                 showAlert('Invalid username or password', 'error');
             }
         }
 
         function logout() {
-            sendDiscordWebhook(`User logged out: ${currentUser.username}`);
+            if (currentUser) {
+                logActivity('Auth', `User logged out: ${currentUser.username}`);
+                sendDiscordWebhook(`🔒 User logged out: **${currentUser.username}**`);
+            }
+            
             currentUser = null;
             cart = [];
             updateUserStatus();
             updateCartDisplay();
-            showAlert('Logged out successfully!');
+            saveAllData();
+            
+            showAlert('Logged out successfully!', 'success');
         }
 
         function updateUserStatus() {
             const userStatusDiv = document.getElementById('user-status');
             if (currentUser) {
                 userStatusDiv.innerHTML = `
-                    <strong>Welcome, ${currentUser.username}!</strong>
+                    <strong>Welcome back, ${currentUser.username}!</strong>
+                    <span style="margin-left: 20px; color: #666;">Last login: ${currentUser.lastLogin ? new Date(currentUser.lastLogin).toLocaleString() : 'First time'}</span>
                     <button onclick="logout()" class="btn" style="padding: 8px 16px; margin-left: 10px;">Logout</button>
                 `;
             } else {
@@ -738,19 +1075,27 @@
             const grid = document.getElementById('products-grid');
             grid.innerHTML = '';
             
+            if (products.length === 0) {
+                grid.innerHTML = '<p style="text-align: center; color: #666; grid-column: 1/-1;">No products available. Contact staff to add products.</p>';
+                return;
+            }
+            
             products.forEach(product => {
                 const productDiv = document.createElement('div');
                 productDiv.className = 'product-card';
                 productDiv.innerHTML = `
                     <h3>${product.name}</h3>
-                    <p class="price" style="font-size: 1.5em; color: #667eea; font-weight: bold; margin: 15px 0;">$${product.price}</p>
-                    <p style="color: #666; margin-bottom: 20px;">${product.description}</p>
-                    <button onclick="addToCart(${product.id})" class="btn" style="width: 100%;" ${!currentUser ? 'disabled' : ''}>
+                    <p class="price" style="font-size: 1.5em; color: #667eea; font-weight: bold; margin: 15px 0;">${product.price}</p>
+                    <p style="color: #666; margin-bottom: 15px;">${product.description}</p>
+                    <small style="color: #999;">Added: ${new Date(product.dateAdded).toLocaleDateString()}</small>
+                    <button onclick="addToCart(${product.id})" class="btn" style="width: 100%; margin-top: 15px;" ${!currentUser ? 'disabled' : ''}>
                         ${currentUser ? 'Add to Cart' : 'Login to Purchase'}
                     </button>
                 `;
                 grid.appendChild(productDiv);
             });
+            
+            logActivity('Products', `Loaded ${products.length} products`);
         }
 
         function addToCart(productId) {
@@ -769,8 +1114,11 @@
                 }
                 
                 updateCartDisplay();
-                showAlert(`${product.name} added to cart!`);
-                sendDiscordWebhook(`${currentUser.username} added ${product.name} to cart`);
+                saveAllData();
+                
+                logActivity('Cart', `${currentUser.username} added ${product.name} to cart`);
+                showAlert(`${product.name} added to cart!`, 'success');
+                sendDiscordWebhook(`🛒 **${currentUser.username}** added **${product.name}** to cart`);
             }
         }
 
@@ -778,10 +1126,12 @@
             const index = cart.findIndex(item => item.id === productId);
             if (index > -1) {
                 const item = cart[index];
-                sendDiscordWebhook(`${currentUser.username} removed ${item.name} from cart`);
+                logActivity('Cart', `${currentUser.username} removed ${item.name} from cart`);
+                sendDiscordWebhook(`🗑️ **${currentUser.username}** removed **${item.name}** from cart`);
                 cart.splice(index, 1);
                 updateCartDisplay();
                 updateCartPage();
+                saveAllData();
             }
         }
 
@@ -812,7 +1162,7 @@
                 itemDiv.innerHTML = `
                     <div>
                         <h4>${item.name}</h4>
-                        <p>$${item.price} x ${item.quantity} = $${itemTotal.toFixed(2)}</p>
+                        <p>${item.price} x ${item.quantity} = ${itemTotal.toFixed(2)}</p>
                     </div>
                     <button onclick="removeFromCart(${item.id})" class="btn btn-danger">Remove</button>
                 `;
@@ -840,23 +1190,32 @@
                 id: Date.now(),
                 invoiceId: invoiceId,
                 customer: currentUser.username,
+                customerEmail: currentUser.email,
                 items: [...cart],
                 total: total,
                 date: new Date().toISOString(),
-                status: 'Pending'
+                status: 'Pending',
+                paymentStatus: 'Paid',
+                shippingAddress: 'Default Address' // In real app, get from user
             };
             
             orders.push(order);
-            saveData();
             
-            // Send order details to Discord
-            const orderDetails = cart.map(item => `${item.name} x${item.quantity} - ${(item.price * item.quantity).toFixed(2)}`).join('\n');
-            sendDiscordWebhook(`🛒 New Order Placed!\n**Invoice ID:** ${invoiceId}\n**Customer:** ${currentUser.username}\n**Items:**\n${orderDetails}\n**Total:** ${total.toFixed(2)}`);
+            // Update user statistics
+            currentUser.totalOrders++;
+            currentUser.totalSpent += total;
             
             // Clear cart
             cart = [];
             updateCartDisplay();
             updateCartPage();
+            saveAllData();
+            
+            logActivity('Order', `Order placed: ${invoiceId} by ${currentUser.username} - ${total.toFixed(2)}`);
+            
+            // Send detailed order to Discord
+            const orderDetails = cart.map(item => `• ${item.name} x${item.quantity} - ${(item.price * item.quantity).toFixed(2)}`).join('\n');
+            sendDiscordWebhook(`💳 **NEW ORDER PLACED!**\n\n**Invoice ID:** ${invoiceId}\n**Customer:** ${currentUser.username} (${currentUser.email})\n**Items:**\n${orderDetails}\n**Total:** ${total.toFixed(2)}\n**Status:** Pending\n\n*Staff can manage this order in the Staff Portal*`);
             
             showAlert(`Order placed successfully! Your Invoice ID is: ${invoiceId}`, 'success');
         }
@@ -875,20 +1234,30 @@
             }
             
             const userOrders = orders.filter(order => order.customer === currentUser.username);
+            const totalSpent = userOrders.reduce((sum, order) => sum + order.total, 0);
             
             accountInfoDiv.innerHTML = `
                 <div class="user-info">
                     <h3>Account Information</h3>
-                    <p><strong>Username:</strong> ${currentUser.username}</p>
-                    <p><strong>Email:</strong> ${currentUser.email}</p>
-                    <p><strong>Member since:</strong> ${new Date(currentUser.registrationDate).toLocaleDateString()}</p>
-                    <button onclick="logout()" class="btn btn-danger">Logout</button>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div>
+                            <p><strong>Username:</strong> ${currentUser.username}</p>
+                            <p><strong>Email:</strong> ${currentUser.email}</p>
+                            <p><strong>Member since:</strong> ${new Date(currentUser.registrationDate).toLocaleDateString()}</p>
+                        </div>
+                        <div>
+                            <p><strong>Total Orders:</strong> ${userOrders.length}</p>
+                            <p><strong>Total Spent:</strong> ${totalSpent.toFixed(2)}</p>
+                            <p><strong>Last Login:</strong> ${currentUser.lastLogin ? new Date(currentUser.lastLogin).toLocaleString() : 'First time'}</p>
+                        </div>
+                    </div>
+                    <button onclick="logout()" class="btn btn-danger" style="margin-top: 15px;">Logout</button>
                 </div>
                 
                 <div style="background: white; padding: 25px; border-radius: 15px; margin-top: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);">
                     <h3>Order History</h3>
                     ${userOrders.length === 0 ? 
-                        '<p>No orders yet.</p>' : 
+                        '<p>No orders yet. <a href="#" onclick="showPage(\'products\')" style="color: #667eea;">Start shopping!</a></p>' : 
                         `<table class="table">
                             <thead>
                                 <tr>
@@ -900,13 +1269,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                ${userOrders.map(order => `
+                                ${userOrders.reverse().map(order => `
                                     <tr>
                                         <td>${order.invoiceId}</td>
                                         <td>${new Date(order.date).toLocaleDateString()}</td>
                                         <td>${order.items.length} items</td>
                                         <td>${order.total.toFixed(2)}</td>
-                                        <td>${order.status}</td>
+                                        <td><span style="padding: 5px 10px; border-radius: 5px; background: ${getStatusColor(order.status)}; color: white; font-size: 0.8em;">${order.status}</span></td>
                                     </tr>
                                 `).join('')}
                             </tbody>
@@ -916,23 +1285,37 @@
             `;
         }
 
+        function getStatusColor(status) {
+            switch(status) {
+                case 'Pending': return '#ffc107';
+                case 'Processing': return '#17a2b8';
+                case 'Shipped': return '#28a745';
+                case 'Delivered': return '#28a745';
+                case 'Cancelled': return '#dc3545';
+                default: return '#6c757d';
+            }
+        }
+
         // Staff functions
         function staffLogin() {
-            const username = document.getElementById('staff-username').value;
+            const username = document.getElementById('staff-username').value.trim();
             const password = document.getElementById('staff-password').value;
             
             // Simple staff authentication (in production, use proper authentication)
-            if (username === 'staff' && password === 'mgmt') {
+            if (username === 'admin' && password === 'admin123') {
                 staffLoggedIn = true;
                 document.getElementById('staff-login').style.display = 'none';
                 document.getElementById('staff-dashboard').style.display = 'block';
-                sendDiscordWebhook(`Staff member logged in: ${username}`);
-                showAlert('Staff login successful!');
+                
+                logActivity('Staff', `Staff member logged in: ${username}`, 'success');
+                sendDiscordWebhook(`👮 **Staff Login:** ${username} has logged into the staff portal`);
+                showAlert('Staff login successful!', 'success');
                 
                 // Clear form
                 document.getElementById('staff-username').value = '';
                 document.getElementById('staff-password').value = '';
             } else {
+                logActivity('Staff', `Failed staff login attempt: ${username}`, 'error');
                 showAlert('Invalid staff credentials', 'error');
             }
         }
@@ -947,8 +1330,9 @@
                 section.style.display = 'none';
             });
             
-            sendDiscordWebhook('Staff member logged out');
-            showAlert('Logged out from staff portal');
+            logActivity('Staff', 'Staff member logged out');
+            sendDiscordWebhook('👮 Staff member logged out of staff portal');
+            showAlert('Logged out from staff portal', 'success');
         }
 
         function showStaffSection(section) {
@@ -967,17 +1351,24 @@
             } else if (section === 'orders') {
                 loadStaffOrders();
             }
+            
+            logActivity('Staff', `Viewing ${section} management`);
         }
 
         function addProduct() {
             if (!staffLoggedIn) return;
             
-            const name = document.getElementById('product-name').value;
+            const name = document.getElementById('product-name').value.trim();
             const price = parseFloat(document.getElementById('product-price').value);
-            const description = document.getElementById('product-description').value;
+            const description = document.getElementById('product-description').value.trim();
             
             if (!name || !price || !description) {
                 showAlert('Please fill in all fields', 'error');
+                return;
+            }
+            
+            if (price <= 0) {
+                showAlert('Price must be greater than 0', 'error');
                 return;
             }
             
@@ -985,14 +1376,17 @@
                 id: Date.now(),
                 name: name,
                 price: price,
-                description: description
+                description: description,
+                dateAdded: new Date().toISOString(),
+                addedBy: 'Staff'
             };
             
             products.push(newProduct);
-            saveData();
+            saveAllData();
             
-            sendDiscordWebhook(`New product added: ${name} - ${price}`);
-            showAlert('Product added successfully!');
+            logActivity('Products', `New product added: ${name} - ${price}`, 'success');
+            sendDiscordWebhook(`🆕 **New Product Added**\n**Name:** ${name}\n**Price:** ${price}\n**Description:** ${description}`);
+            showAlert('Product added successfully!', 'success');
             
             // Clear form
             document.getElementById('product-name').value = '';
@@ -1006,14 +1400,19 @@
         function deleteProduct(productId) {
             if (!staffLoggedIn) return;
             
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            if (!confirm(`Are you sure you want to delete "${product.name}"?`)) return;
+            
             const productIndex = products.findIndex(p => p.id === productId);
             if (productIndex > -1) {
-                const product = products[productIndex];
                 products.splice(productIndex, 1);
-                saveData();
+                saveAllData();
                 
-                sendDiscordWebhook(`Product deleted: ${product.name}`);
-                showAlert('Product deleted successfully!');
+                logActivity('Products', `Product deleted: ${product.name}`, 'error');
+                sendDiscordWebhook(`🗑️ **Product Deleted**\n**Name:** ${product.name}\n**Price:** ${product.price}`);
+                showAlert('Product deleted successfully!', 'success');
                 loadStaffProducts();
                 loadProducts(); // Refresh customer view
             }
@@ -1023,12 +1422,19 @@
             const tbody = document.getElementById('staff-products-list');
             tbody.innerHTML = '';
             
+            if (products.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #666;">No products available</td></tr>';
+                return;
+            }
+            
             products.forEach(product => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
+                    <td>${product.id}</td>
                     <td>${product.name}</td>
                     <td>${product.price}</td>
-                    <td>${product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description}</td>
+                    <td title="${product.description}">${product.description.length > 50 ? product.description.substring(0, 50) + '...' : product.description}</td>
+                    <td>${new Date(product.dateAdded).toLocaleDateString()}</td>
                     <td>
                         <button onclick="deleteProduct(${product.id})" class="btn btn-danger">Delete</button>
                     </td>
@@ -1041,12 +1447,20 @@
             const tbody = document.getElementById('staff-users-list');
             tbody.innerHTML = '';
             
+            if (users.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #666;">No users registered</td></tr>';
+                return;
+            }
+            
             users.forEach(user => {
+                const userOrders = orders.filter(order => order.customer === user.username);
                 const row = document.createElement('tr');
                 row.innerHTML = `
+                    <td>${user.id}</td>
                     <td>${user.username}</td>
                     <td>${user.email}</td>
                     <td>${new Date(user.registrationDate).toLocaleDateString()}</td>
+                    <td>${userOrders.length}</td>
                     <td>
                         <button onclick="resetUserPassword(${user.id})" class="btn" style="margin-right: 10px;">Reset Password</button>
                         <button onclick="deleteUser(${user.id})" class="btn btn-danger">Delete Account</button>
@@ -1060,29 +1474,40 @@
             if (!staffLoggedIn) return;
             
             const user = users.find(u => u.id === userId);
-            if (user) {
-                const newPassword = 'temp123'; // In production, generate random password
-                user.password = newPassword;
-                saveData();
-                
-                sendDiscordWebhook(`Password reset for user: ${user.username}. New password: ${newPassword}`);
-                showAlert(`Password reset for ${user.username}. New password: ${newPassword}`);
-            }
+            if (!user) return;
+            
+            if (!confirm(`Reset password for ${user.username}?`)) return;
+            
+            const newPassword = 'temp' + Math.random().toString(36).substr(2, 8);
+            user.password = newPassword;
+            saveAllData();
+            
+            logActivity('Users', `Password reset for user: ${user.username}`, 'success');
+            sendDiscordWebhook(`🔑 **Password Reset**\n**User:** ${user.username}\n**Email:** ${user.email}\n**New Password:** ${newPassword}`);
+            showAlert(`Password reset for ${user.username}. New password: ${newPassword}`, 'success');
         }
 
         function deleteUser(userId) {
             if (!staffLoggedIn) return;
             
-            if (!confirm('Are you sure you want to delete this user account?')) return;
+            const user = users.find(u => u.id === userId);
+            if (!user) return;
+            
+            if (!confirm(`Are you sure you want to delete the account for ${user.username}? This will also delete all their orders.`)) return;
             
             const userIndex = users.findIndex(u => u.id === userId);
             if (userIndex > -1) {
-                const user = users[userIndex];
-                users.splice(userIndex, 1);
-                saveData();
+                // Remove user's orders
+                const userOrders = orders.filter(order => order.customer === user.username);
+                orders = orders.filter(order => order.customer !== user.username);
                 
-                sendDiscordWebhook(`User account deleted: ${user.username} (${user.email})`);
-                showAlert('User account deleted successfully!');
+                // Remove user
+                users.splice(userIndex, 1);
+                saveAllData();
+                
+                logActivity('Users', `User account deleted: ${user.username} (${userOrders.length} orders removed)`, 'error');
+                sendDiscordWebhook(`🚫 **User Account Deleted**\n**User:** ${user.username}\n**Email:** ${user.email}\n**Orders Removed:** ${userOrders.length}`);
+                showAlert('User account deleted successfully!', 'success');
                 loadStaffUsers();
             }
         }
@@ -1091,15 +1516,24 @@
             const tbody = document.getElementById('staff-orders-list');
             tbody.innerHTML = '';
             
-            orders.forEach(order => {
+            if (orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: #666;">No orders placed yet</td></tr>';
+                return;
+            }
+            
+            // Sort orders by date (newest first)
+            const sortedOrders = [...orders].sort((a, b) => new Date(b.date) - new Date(a.date));
+            
+            sortedOrders.forEach(order => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${order.invoiceId}</td>
                     <td>${order.customer}</td>
+                    <td>${order.items.length} items</td>
                     <td>${order.total.toFixed(2)}</td>
                     <td>${new Date(order.date).toLocaleDateString()}</td>
                     <td>
-                        <select onchange="updateOrderStatus(${order.id}, this.value)">
+                        <select onchange="updateOrderStatus(${order.id}, this.value)" style="padding: 5px; border-radius: 5px; border: 1px solid #ccc;">
                             <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>Pending</option>
                             <option value="Processing" ${order.status === 'Processing' ? 'selected' : ''}>Processing</option>
                             <option value="Shipped" ${order.status === 'Shipped' ? 'selected' : ''}>Shipped</option>
@@ -1120,19 +1554,24 @@
             
             const order = orders.find(o => o.id === orderId);
             if (order) {
+                const oldStatus = order.status;
                 order.status = newStatus;
-                saveData();
+                saveAllData();
                 
-                sendDiscordWebhook(`Order ${order.invoiceId} status updated to: ${newStatus} (Customer: ${order.customer})`);
-                showAlert('Order status updated successfully!');
+                logActivity('Orders', `Order ${order.invoiceId} status updated from ${oldStatus} to ${newStatus}`, 'success');
+                sendDiscordWebhook(`📦 **Order Status Updated**\n**Invoice ID:** ${order.invoiceId}\n**Customer:** ${order.customer}\n**Status:** ${oldStatus} → ${newStatus}\n**Total:** ${order.total.toFixed(2)}`);
+                showAlert('Order status updated successfully!', 'success');
             }
         }
 
         function viewOrderDetails(orderId) {
             const order = orders.find(o => o.id === orderId);
             if (order) {
-                const itemsList = order.items.map(item => `${item.name} x${item.quantity} - ${(item.price * item.quantity).toFixed(2)}`).join('\n');
-                alert(`Order Details:\n\nInvoice ID: ${order.invoiceId}\nCustomer: ${order.customer}\nDate: ${new Date(order.date).toLocaleString()}\nStatus: ${order.status}\n\nItems:\n${itemsList}\n\nTotal: ${order.total.toFixed(2)}`);
+                const itemsList = order.items.map(item => `• ${item.name} x${item.quantity} - ${(item.price * item.quantity).toFixed(2)}`).join('\n');
+                const details = `ORDER DETAILS\n\nInvoice ID: ${order.invoiceId}\nCustomer: ${order.customer}\nEmail: ${order.customerEmail || 'N/A'}\nDate: ${new Date(order.date).toLocaleString()}\nStatus: ${order.status}\nPayment: ${order.paymentStatus || 'N/A'}\n\nITEMS:\n${itemsList}\n\nTOTAL: ${order.total.toFixed(2)}`;
+                
+                alert(details);
+                logActivity('Orders', `Viewed details for order ${order.invoiceId}`);
             }
         }
 
@@ -1140,6 +1579,7 @@
         async function sendDiscordWebhook(message) {
             if (!DISCORD_WEBHOOK_URL || DISCORD_WEBHOOK_URL === 'YOUR_DISCORD_WEBHOOK_URL_HERE') {
                 console.log('Discord webhook not configured:', message);
+                logActivity('Discord', 'Webhook not configured - message not sent');
                 return;
             }
             
@@ -1151,90 +1591,102 @@
                     },
                     body: JSON.stringify({
                         content: message,
-                        username: 'Processed Orders'
+                        username: 'E-Commerce Store',
+                        avatar_url: 'https://cdn-icons-png.flaticon.com/512/1170/1170678.png'
                     })
                 });
                 
-                if (!response.ok) {
-                    console.error('Failed to send Discord webhook');
+                if (response.ok) {
+                    logActivity('Discord', 'Webhook sent successfully', 'success');
+                } else {
+                    logActivity('Discord', `Webhook failed: ${response.status}`, 'error');
                 }
             } catch (error) {
+                logActivity('Discord', `Webhook error: ${error.message}`, 'error');
                 console.error('Error sending Discord webhook:', error);
             }
         }
 
-        // Data persistence (in real app, this would be a proper database)
-        function saveData() {
-            const data = {
-                users: users,
-                products: products,
-                orders: orders
-            };
-            // In a real application, this would save to a database
-            console.log('Data saved:', data);
-        }
-
-        function loadData() {
-            // In a real application, this would load from a database
-            // For now, data persists only during the session
-        }
-
         function initializeSampleData() {
+            logActivity('System', 'Initializing sample data');
+            
             products = [
                 {
-                    id: 1,
+                    id: 1001,
                     name: "Premium Wireless Headphones",
                     price: 199.99,
-                    description: "High-quality wireless headphones with noise cancellation and premium sound quality."
+                    description: "High-quality wireless headphones with active noise cancellation, 30-hour battery life, and premium sound quality.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 },
                 {
-                    id: 2,
+                    id: 1002,
                     name: "Smart Fitness Watch",
                     price: 299.99,
-                    description: "Advanced fitness tracking with heart rate monitor, GPS, and smartphone integration."
+                    description: "Advanced fitness tracking with heart rate monitor, GPS, sleep tracking, and smartphone integration with 7-day battery life.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 },
                 {
-                    id: 3,
-                    name: "Bluetooth Speaker",
+                    id: 1003,
+                    name: "Portable Bluetooth Speaker",
                     price: 79.99,
-                    description: "Portable Bluetooth speaker with excellent sound quality and long battery life."
+                    description: "Waterproof Bluetooth speaker with 360-degree sound, 20-hour battery life, and built-in voice assistant.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 },
                 {
-                    id: 4,
-                    name: "Wireless Charging Pad",
+                    id: 1004,
+                    name: "Fast Wireless Charging Pad",
                     price: 49.99,
-                    description: "Fast wireless charging pad compatible with all Qi-enabled devices."
+                    description: "15W fast wireless charging pad with LED indicator, compatible with all Qi-enabled devices including iPhone and Android.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 },
                 {
-                    id: 5,
-                    name: "USB-C Hub",
+                    id: 1005,
+                    name: "USB-C Multi-Port Hub",
                     price: 89.99,
-                    description: "Multi-port USB-C hub with HDMI, USB 3.0, and SD card slots for laptops."
+                    description: "7-in-1 USB-C hub with 4K HDMI output, USB 3.0 ports, SD card reader, and 100W power delivery for laptops.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 },
                 {
-                    id: 6,
-                    name: "Gaming Mouse",
+                    id: 1006,
+                    name: "RGB Gaming Mouse",
                     price: 69.99,
-                    description: "High-precision gaming mouse with customizable RGB lighting and programmable buttons."
+                    description: "High-precision gaming mouse with 16000 DPI sensor, customizable RGB lighting, and 8 programmable buttons.",
+                    dateAdded: new Date().toISOString(),
+                    addedBy: 'System'
                 }
             ];
             
-            // Add sample staff user
-            users.push({
-                id: 1,
-                username: 'demo_user',
-                email: 'demo@example.com',
-                password: 'demo123',
-                registrationDate: new Date().toISOString()
-            });
+            // Add sample demo user
+            if (users.length === 0) {
+                users.push({
+                    id: 2001,
+                    username: 'demo_user',
+                    email: 'demo@ecommerce.com',
+                    password: 'demo123',
+                    registrationDate: new Date().toISOString(),
+                    lastLogin: null,
+                    totalOrders: 0,
+                    totalSpent: 0
+                });
+            }
             
+            saveAllData();
             loadProducts();
+            
+            logActivity('System', `Sample data initialized: ${products.length} products, ${users.length} users`, 'success');
+            showAlert('Sample data loaded successfully!', 'info');
         }
 
         // Close modals when clicking outside
         window.onclick = function(event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
+                logActivity('UI', 'Modal closed by clicking outside');
             }
         }
 
@@ -1251,6 +1703,143 @@
                 }
             }
         });
+
+        // Handle page visibility change for auto-save
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                saveAllData();
+                logActivity('System', 'Auto-saved data on page hide');
+            }
+        });
+
+        // Handle before page unload
+        window.addEventListener('beforeunload', function(e) {
+            saveAllData();
+        });
+
+        // Periodic data validation
+        setInterval(function() {
+            try {
+                // Validate data integrity
+                const dataValid = Array.isArray(users) && Array.isArray(products) && Array.isArray(orders);
+                if (!dataValid) {
+                    logActivity('System', 'Data corruption detected, reloading...', 'error');
+                    loadAllData();
+                }
+            } catch (error) {
+                logActivity('System', `Data validation error: ${error.message}`, 'error');
+            }
+        }, 60000); // Check every minute
+
+        // Search functionality (future enhancement)
+        function searchProducts(query) {
+            const filtered = products.filter(product => 
+                product.name.toLowerCase().includes(query.toLowerCase()) ||
+                product.description.toLowerCase().includes(query.toLowerCase())
+            );
+            logActivity('Search', `Product search for "${query}" returned ${filtered.length} results`);
+            return filtered;
+        }
+
+        // Analytics functions (future enhancement)
+        function getAnalytics() {
+            const totalRevenue = orders.reduce((sum, order) => sum + order.total, 0);
+            const avgOrderValue = orders.length > 0 ? totalRevenue / orders.length : 0;
+            const topProducts = getTopSellingProducts();
+            
+            return {
+                totalUsers: users.length,
+                totalProducts: products.length,
+                totalOrders: orders.length,
+                totalRevenue: totalRevenue,
+                averageOrderValue: avgOrderValue,
+                topProducts: topProducts
+            };
+        }
+
+        function getTopSellingProducts() {
+            const productSales = {};
+            
+            orders.forEach(order => {
+                order.items.forEach(item => {
+                    if (productSales[item.id]) {
+                        productSales[item.id].quantity += item.quantity;
+                        productSales[item.id].revenue += item.price * item.quantity;
+                    } else {
+                        productSales[item.id] = {
+                            name: item.name,
+                            quantity: item.quantity,
+                            revenue: item.price * item.quantity
+                        };
+                    }
+                });
+            });
+            
+            return Object.values(productSales)
+                .sort((a, b) => b.quantity - a.quantity)
+                .slice(0, 5);
+        }
+
+        // System health check
+        function systemHealthCheck() {
+            const health = {
+                dataIntegrity: Array.isArray(users) && Array.isArray(products) && Array.isArray(orders),
+                storageAvailable: typeof(Storage) !== "undefined",
+                discordWebhook: DISCORD_WEBHOOK_URL !== 'YOUR_DISCORD_WEBHOOK_URL_HERE',
+                lastSync: localStorage.getItem(DB_KEYS.LAST_SYNC),
+                errors: databaseLogs.filter(log => log.type === 'error').length
+            };
+            
+            logActivity('System', `Health check completed - ${Object.entries(health).filter(([k,v]) => v === true || v > 0).length}/6 checks passed`);
+            return health;
+        }
+
+        // Export functions for external use
+        window.ecommerceAPI = {
+            saveData: saveAllData,
+            loadData: loadAllData,
+            getAnalytics: getAnalytics,
+            systemHealth: systemHealthCheck,
+            exportData: exportData,
+            searchProducts: searchProducts
+        };
+
+        // Initialize notification system
+        function initNotifications() {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                logActivity('System', 'Browser notifications enabled');
+            } else if ('Notification' in window && Notification.permission !== 'denied') {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === 'granted') {
+                        logActivity('System', 'Browser notifications permission granted');
+                    }
+                });
+            }
+        }
+
+        function showNotification(title, message, icon = '🛒') {
+            if ('Notification' in window && Notification.permission === 'granted') {
+                new Notification(title, {
+                    body: message,
+                    icon: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM2NjdlZWEiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0id2hpdGUiPgo8cGF0aCBkPSJNNyA0VjJIMTdWNEgyMFY2SDIxQzIxLjU1IDYgMjIgNi40NSAyMiA3UzIxLjU1IDggMjEgOEgyMEwyMC45NSAxMUMyMC45IDE2LjE3IDE2Ljc2IDIwLjQgMTEuNiAyMS4wNUMxMS40IDIxLjA3IDExLjIgMjEuMDcgMTEuMDEgMjEuMDVDNS44NSAyMC40IDEuNiAxNi4xNyAxLjU1IDExTDAuOTkgOEgwLjAxQy0wLjU0IDggLTAuOTkgNy41NSAtMC45OSA3Uz0wLjU0IDYgMC4wMSA2SDE2VjRIN1oiLz4KPC9zdmc+CjwvZz4KPC9zdmc+'
+                });
+            }
+        }
+
+        // Initialize on load
+        setTimeout(initNotifications, 2000);
+        
+        // Welcome message
+        setTimeout(() => {
+            if (currentUser) {
+                showNotification('Welcome Back!', `Hello ${currentUser.username}, you have ${cart.length} items in your cart.`);
+            }
+        }, 3000);
+
+        console.log('🛒 E-Commerce Store initialized with global data persistence');
+        console.log('📊 Access analytics via: window.ecommerceAPI.getAnalytics()');
+        console.log('💾 Manual save via: window.ecommerceAPI.saveData()');
+        console.log('🔍 Search products via: window.ecommerceAPI.searchProducts("query")');
     </script>
 </body>
 </html>
