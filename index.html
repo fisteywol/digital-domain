@@ -463,6 +463,7 @@
                     <button class="btn btn-primary" onclick="showStaffSection('users-management')">Manage Users</button>
                     <button class="btn btn-primary" onclick="showStaffSection('support-management')">Support Tickets</button>
                     <button class="btn btn-primary" onclick="showStaffSection('orders-management')">Orders</button>
+                    <button class="btn btn-primary" onclick="showStaffSection('webhook-logs')">Webhook Logs</button>
                     <button class="btn btn-secondary" onclick="staffLogout()">Logout</button>
                 </div>
 
@@ -498,6 +499,20 @@
                 <div id="orders-management" class="staff-subsection hidden">
                     <h4>Orders Management</h4>
                     <div id="orders-list"></div>
+                </div>
+
+                <!-- Webhook Logs -->
+                <div id="webhook-logs" class="staff-subsection hidden">
+                    <h4>Webhook Activity Logs</h4>
+                    <p>Monitor Discord webhook delivery status and fallback logs.</p>
+                    <div style="margin-bottom: 1rem;">
+                        <button class="btn btn-primary" onclick="refreshWebhookLogs()">Refresh Logs</button>
+                        <button class="btn btn-secondary" onclick="clearWebhookLogs()">Clear Logs</button>
+                        <button class="btn btn-secondary" onclick="testWebhook()">Test Webhook</button>
+                    </div>
+                    <div id="webhook-logs-container" style="background: #f8f9fa; border-radius: 8px; padding: 1rem; max-height: 400px; overflow-y: auto;">
+                        <p>No logs yet. Webhook activity will appear here.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -931,6 +946,8 @@
                 loadStaffSupportTickets();
             } else if (sectionId === 'orders-management') {
                 loadStaffOrders();
+            } else if (sectionId === 'webhook-logs') {
+                loadWebhookLogs();
             }
         }
 
